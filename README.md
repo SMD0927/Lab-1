@@ -14,14 +14,15 @@
 
 ----
 ## Introducción
+
 En este laboratorio se analizó el patrón y la frecuencia respiratoria mediante la adquisición de una señal biológica usando sensores y Arduino. Posteriormente, la señal se procesó en MATLAB para observar su comportamiento en el tiempo y la frecuencia, comparando condiciones de reposo y habla.
+ó
+En este laboratorio se estudió el patrón y la frecuencia respiratoria mediante la adquisición y análisis de una señal biológica con sensores, Arduino y MATLAB. Esta práctica brinda una base teórica y aplicada sobre el monitoreo respiratorio, permitiendo comprender su relevancia dentro de la instrumentación biomédica y su utilidad en contextos reales de evaluación fisiológica.
+
 -----
 
-## Convolución
-La convolución es una operación matemática que combina dos funciones para describir la superposición entre ambas. La convolución toma dos funciones, “desliza” una sobre la otra, multiplica los valores de las funciones en todos los puntos de superposición, y suma los productos para crear una nueva función. Este proceso crea una nueva función que representa cómo interactúan las dos funciones originales entre sí.
-La convolución se utiliza en el procesamiento digital de señales para estudiar y diseñar sistemas lineales de tiempo invariante (LTI), como los filtros digitales.
-La señal de salida de un sistema LTI,y[n], es la convolución de la señal de entrada x[n] y la respuesta al impulso h[n] del sistema.[1]
-### Fórmula de la convolución discreta:
+## Proceso Respiratorio
+La respiración es un proceso vital para el funcionamiento normal en todos los niveles de organización, desde la célula hasta el organismo. El oxígeno, suministrado por la circulación local a nivel tisular, funciona en la membrana interna mitocondrial como mediador esencial para la liberación de energía. En las mitocondrias, los nutrientes digeridos experimentan reacciones metabólicas, llegan a la cadena de transporte de electrones y liberan compuestos de alta energía (p. ej., trifosfato de adenosina). El principal subproducto de este proceso, el dióxido de carbono, se libera en la sangre venosa y regresa a los pulmones. El dióxido de carbono se difunde a través de las paredes alveolares y se disuelve en el aire exhalado. La frecuencia respiratoria (es decir, el número de respiraciones por minuto) está altamente regulada para que las células produzcan la energía óptima en cualquier momento. Un complejo sistema nervioso de tejidos nerviosos regula la tasa de entrada de oxígeno y la tasa de salida de dióxido de carbono, ajustándola en consecuencia en condiciones que alteran las presiones parciales de los gases en la sangre. La respiración involucra el cerebro, el tronco encefálico, los músculos respiratorios, los pulmones, las vías respiratorias y los vasos sanguíneos. Todas estas estructuras tienen una participación estructural, funcional y reguladora en la respiración.
 
 $$
 y[n] = \sum_{k=0}^{M-1} x[k] h[n-k]
