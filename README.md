@@ -22,18 +22,15 @@ En este laboratorio se estudió el patrón y la frecuencia respiratoria mediante
 -----
 
 ## Proceso Respiratorio
-La respiración es un proceso vital para el funcionamiento normal en todos los niveles de organización, desde la célula hasta el organismo. El oxígeno, suministrado por la circulación local a nivel tisular, funciona en la membrana interna mitocondrial como mediador esencial para la liberación de energía. En las mitocondrias, los nutrientes digeridos experimentan reacciones metabólicas, llegan a la cadena de transporte de electrones y liberan compuestos de alta energía (p. ej., trifosfato de adenosina). El principal subproducto de este proceso, el dióxido de carbono, se libera en la sangre venosa y regresa a los pulmones. El dióxido de carbono se difunde a través de las paredes alveolares y se disuelve en el aire exhalado. La frecuencia respiratoria (es decir, el número de respiraciones por minuto) está altamente regulada para que las células produzcan la energía óptima en cualquier momento. Un complejo sistema nervioso de tejidos nerviosos regula la tasa de entrada de oxígeno y la tasa de salida de dióxido de carbono, ajustándola en consecuencia en condiciones que alteran las presiones parciales de los gases en la sangre. La respiración involucra el cerebro, el tronco encefálico, los músculos respiratorios, los pulmones, las vías respiratorias y los vasos sanguíneos. Todas estas estructuras tienen una participación estructural, funcional y reguladora en la respiración.
+La respiración es un proceso vital para el funcionamiento normal en todos los niveles de organización, desde la célula hasta el organismo. El oxígeno, suministrado por la circulación local a nivel tisular, funciona en la membrana interna mitocondrial como mediador esencial para la liberación de energía. En las mitocondrias, los nutrientes digeridos experimentan reacciones metabólicas, llegan a la cadena de transporte de electrones y liberan compuestos de alta energía (p. ej., trifosfato de adenosina). El principal subproducto de este proceso, el dióxido de carbono, se libera en la sangre venosa y regresa a los pulmones. El dióxido de carbono se difunde a través de las paredes alveolares y se disuelve en el aire exhalado. La frecuencia respiratoria (es decir, el número de respiraciones por minuto) está altamente regulada para que las células produzcan la energía óptima en cualquier momento. Un complejo sistema nervioso de tejidos nerviosos regula la tasa de entrada de oxígeno y la tasa de salida de dióxido de carbono, ajustándola en consecuencia en condiciones que alteran las presiones parciales de los gases en la sangre. La respiración involucra el cerebro, el tronco encefálico, los músculos respiratorios, los pulmones, las vías respiratorias y los vasos sanguíneos. Todas estas estructuras tienen una participación estructural, funcional y reguladora en la respiración. [1]
 
-$$
-y[n] = \sum_{k=0}^{M-1} x[k] h[n-k]
-$$
+<p align="center">
+  <img width="400" height="300" alt="ChatGPT Image 10 feb 2026, 11_51_06 p m" src="https://github.com/user-attachments/assets/af834e30-64be-4e7f-9ad0-447e488c4079" />
+</p>
+<p align="center">
+  Fig 1. Proceso respiratorio
+</p>
 
-Donde:
-
-- \(y[n]\) es la señal de salida.
-- \(x[k]\) es la señal de entrada.
-- \(h[n-k]\) es la respuesta al impulso del sistema desplazada en el tiempo.
-- \(M\) es la longitud de la señal de entrada.
 
 ### 1. Convolución entre la señal x[n] y del sistema h[n]
 ```python
@@ -346,13 +343,13 @@ Ambas gráficas son fundamentales para comprender el comportamiento de la señal
 
 ----
 ## Bibliografias
-- [1] https://la.mathworks.com/discovery/convolution.html
-- [2] https://radartopix.com/es/que-es-la-correlacion-en-las-senales/
-- [3] https://link.springer.com/chapter/10.1007/978-3-540-74471-9_31
+- [1] Chourpiliadis C, Bhardwaj A. Physiology, Respiratory Rate. [Updated 2022 Sep 12]. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2025 Jan-. Available from: https://www.ncbi.nlm.nih.gov/books/NBK537306/
+- [2] 
+- [3] 
 - [4] https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272009000600003
 - [5] https://prezi.com/p/cwcmwut1n1fx/densidad-espectral-de-potencia/#:~:text=La%20Densidad%20Espectral%20de%20Potencia%20(DSP)%20mide%20la%20potencia%20de,frecuencias%20en%20una%20se%C3%B1al%20analizada
 ----
 ## Autores 
-- Samuel Peña
-- Ana Abril
+- 
+- 
 - Santiago Mora
