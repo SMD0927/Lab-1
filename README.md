@@ -3,20 +3,18 @@
 
 
 ## Requisitos
-- Hardware:
+ Hardware:
  - Arduino IDE
  - Matlab
-- Software:
+   
+  Software:
  - Sensor FSR 402
  - ESP32
 
-Instalar dependencias:
-```python
-pip install wfdb numpy matplotlib seaborn
-```
+
 ----
 ## Introducción
-En este laboratorio  se observo cómo se comportan las señales tanto en el tiempo como en la frecuencia. Lo haremos aplicando tres técnicas fundamentales: la convolución, la correlación y la transformada de Fourier. Además del análisis de una señal electromiografía (EMG).
+En este laboratorio se analizó el patrón y la frecuencia respiratoria mediante la adquisición de una señal biológica usando sensores y Arduino. Posteriormente, la señal se procesó en MATLAB para observar su comportamiento en el tiempo y la frecuencia, comparando condiciones de reposo y habla.
 -----
 
 ## Convolución
