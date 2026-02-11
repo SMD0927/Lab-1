@@ -1,14 +1,14 @@
-# Convolución, correlación y transformación 
- LABORATORIO - 2 PROCESAMIENTO DIGITAL DE SEÑALES
+# Instrumentación Biomédica y Biosensores 
+ LABORATORIO - 1 Monitoreo del patrón y frecuencia respiratoria 
 
 
 ## Requisitos
-- Python 3.9
-- Bibliotecas necesarias:
-  - wfdb
-  - numpy
-  - matplotlib
-  - seaborn
+- Hardware:
+ - Arduino IDE
+ - Matlab
+- Software:
+ - Sensor FSR 402
+ - ESP32
 
 Instalar dependencias:
 ```python
