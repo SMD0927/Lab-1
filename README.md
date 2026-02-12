@@ -448,12 +448,19 @@ Este procedimiento mejora la precisión del análisis y permite evaluar objetiva
   Fig 5. Respiración durante el habla
 </p>
 En base de las anteriores graficas las pasamos el dominio de FFT donde obtuvimos en cada grafica una frecuencia domoniante la cual utlizamos en para hallar las frecuencia respiratoria,como se puede observar en ambas graficas sus frecuencias dominates estan en el rango de (0.2-0.26).Cuyo resultados estan dentro del rango aceptable para un adulto sano entre los (12-20 rpm).
+
 - FR reposo=12rpm
 - FR hablando=12rpm
-Estos son resultados coherentes con los valores fisiológicos normales de una persona adulta en estado de reposo. Aunque la frecuencia respiratoria obtenida es similar en ambas condiciones, se evidencia que la principal diferencia no se encuentra en la cantidad de respiraciones por minuto sino en la forma del ciclo respiratorio. Durante el habla se observa mayor irregularidad en la señal, así como una espiración más controlada y prolongada, lo cual genera pequeñas variaciones en la distribución de energía del espectro de frecuencias.
+  
+Estos son resultados coherentes con los valores fisiológicos normales de una persona adulta en estado de reposo. Aunque la frecuencia respiratoria obtenida es similar en ambas condiciones, se evidencia que la principal diferencia no se encuentra en la cantidad de respiraciones por minuto sino en la forma del ciclo respiratorio. Durante el habla se observa mayor irregularidad en la señal, así como una espiración más controlada y prolongada, lo cual genera pequeñas variaciones en la distribución de energía del espectro de frecuencias.Además, se mostró que la correcta colocación del sensor FSR402 en la región torácica fue un factor clave para la calidad de la señal obtenida. Una ubicación adecuada permitió captar con mayor claridad las variaciones mecánicas de expansión y contracción del tórax. Esto redujo el ruido por movimiento y mejoró la precisión en la estimación de la frecuencia respiratoria y del patrón respiratorio general.
 
 # 6. CONCLUSIONES
-
+- Se evaluó la correcta influencia del habla en el patrón respiratorio.
+- Aunque la frecuencia respiratoria promedio se mantiene dentro de valores normales, la forma de la señal cambia.
+- Se observan espiraciones más largas y mayor irregularidad mientras las persona esta hablando.
+- También se identificaron las variables físicas que afectan el proceso respiratorio, especialmente la variación de presión mecánica y la expansión del tórax.
+- Estas pudieron medirse de manera indirecta con el sensor FSR402.
+- Finalmente, se creó un sistema funcional para adquirir y procesar señales con ESP32 y MATLAB,este sistema puede extraer tanto el patrón como la frecuencia respiratoria y identificar claramente las diferencias entre la respiración en reposo y durante el habla.
 # 7. PREGUNTAS
 
 # 8. BIBLIOGRAFIAS
