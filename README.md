@@ -50,7 +50,8 @@ La respiración es un proceso vital para el funcionamiento normal en todos los n
 </p>
 
 
-# 4. Captura de la señal
+# 4. Parte B (Captura de la señal)
+
 Este proyecto implementa un sistema de adquisición de señal respiratoria utilizando una ESP32 programada en Arduino IDE, la cual captura la variación de voltaje generada por un sensor respiratorio y envía los datos a MATLAB mediante comunicación serial.
 
 El objetivo del script en MATLAB es:
@@ -112,7 +113,7 @@ Aquí se definen los parámetros principales del sistema:
 - Fs (frecuencia de muestreo): determina cuántas muestras por segundo se adquieren.
 
 - ventana: cantidad de segundos visibles en tiempo real.
-- 
+ 
 ¿Por qué se eligió Fs = 50 Hz?
 
 La respiración humana en reposo tiene una frecuencia aproximada entre 0.2 y 0.33 Hz (12–20 respiraciones por minuto), y durante el habla puede aumentar aprox de 0.5 Hz.
@@ -258,44 +259,151 @@ disp("Grabación finalizada y guardada como: " + archivo);
 
 
 
+## Parte B (Parte Filtrado)
+
+### Después de adquirir y almacenar la señal respiratoria desde la ESP32, es necesario procesarla para obtener información fisiológicamente relevante. La señal original puede contener ruido, artefactos de movimiento y componentes no deseadas, por lo que se aplica un filtrado digital.
+
+### Posteriormente, se utiliza la Transformada Rápida de Fourier (FFT) para transformar la señal del dominio del tiempo al dominio de la frecuencia, permitiendo identificar la frecuencia respiratoria dominante de manera automática y objetiva.
 
 
-
-
----
-
-### 2. Grafico de la señal x[n] y del sistema h[n]
-```python
-fig = plt.figure(figsize=(10, 5)) 
-plt.plot(h,color='g')
-plt.stem(range(len(h)), h)
-plt.title("Sistema (santiago)")  
-plt.xlabel("(n)") 
-plt.ylabel("h [n]") 
-plt.grid()
-```
-
-<p align="center">
-    <img src="https://github.com/user-attachments/assets/b400a6c8-f58f-4757-a74c-ed36a19d3d59" alt="imagen" width="450">
-</p>
+## 1. Carga de datos
 
 ```python
-fig = plt.figure(figsize=(10, 5)) 
-plt.plot(x,color='g')
-plt.stem(range(len(x)), x)
-plt.title("Señal (santiago)")  
-plt.xlabel("(n)") 
-plt.ylabel("x [n]") 
-plt.grid()  
+load("HABLANDO.mat"); 
+% variables: voltaje, tiempo_total, Fs
+
+x = voltaje; 
+t = tiempo_total;
 ```
 
-<p align="center">
-    <img src="https://github.com/user-attachments/assets/fa6848b8-bb89-4478-9399-7f6207653284" alt="imagen" width="450">
-</p>
+carga la señal previamente adquirida desde la ESP32.
 
-Este código genera dos gráficos para representar la respuesta al impulso h[n] y la señal de entrada x[n]. Para cada una, se crea una figura de 10x5 y se trazan dos representaciones: una línea verde (plt.plot()) y un gráfico de tipo stem (plt.stem()) para resaltar los valores discretos.
+- voltaje → señal respiratoria en el dominio del tiempo.
 
----
+- tiempo_total → eje temporal.
+
+- Fs → frecuencia de muestreo (50 Hz).
+
+Aquí comienza el procesamiento de la señal almacenada
+
+
+### 2. Filtrado digital (Pasa-banda 0.1–0.5 Hz)
+
+```python
+% Respiración: 0.1 a 0.5 Hz (6–30 resp/min)
+
+f_low = 0.1; % Hz
+f_high = 0.5; % Hz
+
+[b,a] = butter(2,[f_low f_high]/(Fs/2),"bandpass");
+x_filt = filtfilt(b,a,x);
+```
+
+### ¿Por qué se aplicó un filtro?
+
+La señal original puede contener:
+
+- Ruido eléctrico.
+
+- Movimiento corporal, etc
+
+Por ello se utiliza un filtro pasa-banda para conservar únicamente el rango fisiológico de interés.
+
+### ¿Por qué 0.1–0.5 Hz?
+
+La frecuencia respiratoria humana normal se encuentra aproximadamente entre:
+
+- 6 respiraciones/min → 0.1 Hz
+
+- 30 respiraciones/min → 0.5 Hz
+
+ Por tanto, este rango:
+
+- Elimina componentes demasiado lentas (por ejemplo movimiento).
+
+- Elimina componentes (ruido, vibraciones, artefactos).
+
+###  ¿Por qué Butterworth de orden 2?
+
+
+El filtro Butterworth se eligió porque:
+
+- Tiene respuesta suave y sin ondulaciones.
+
+- No distorsiona significativamente la amplitud.
+
+- Es adecuado para señales biomédicas.
+
+### El orden 2 es suficiente porque:
+
+- La respiración es una señal simple y lenta.
+
+- No se requiere una pendiente  brusca.
+
+
+## 3️. Visualización en el dominio del tiempo
+
+```python
+plot(t,x,'Color',[0.6 0.6 0.6]); hold on;
+plot(t,x_filt,'b','LineWidth',1.5);
+```
+Aquí se comparan:
+
+- Señal original 
+
+- Señal filtrada 
+
+Esto permite observar cómo el filtrado mejora la claridad del patrón respiratorio y facilita la identificación de ciclos.
+
+
+## 4. Transformada Rápida de Fourier (FFT)
+
+
+```python
+N = length(x_filt);
+X = fft(x_filt);
+f = (0:N-1)*(Fs/N);
+
+mag = abs(X)/N;
+```
+La señal respiratoria inicialmente está en el dominio del tiempo.
+La FFT permite convertirla al dominio de la frecuencia para identificar qué frecuencias la componen.
+
+El objetivo principal es encontrar la frecuencia dominante, que corresponde a la frecuencia respiratoria.
+
+- La respiración ocurre por debajo de 1 Hz.
+
+- Frecuencias mayores no son fisiológicamente relevantes en este contexto.
+
+
+## 5. Cálculo de la frecuencia respiratoria dominante
+
+
+```python
+[~,idx] = max(mag);
+f_resp = f(idx);
+resp_min = f_resp * 60;
+```
+
+- Identifica el pico máximo del espectro.
+
+- Se obtiene la frecuencia correspondiente.
+
+- Se convierte a respiraciones por minuto multiplicando por 60.
+
+
+### Justificación
+
+El filtrado pasa-banda 0.1–0.5 Hz permite aislar la componente fisiológica respiratoria eliminando ruido y artefactos. Posteriormente, la Transformada Rápida de Fourier permite identificar la frecuencia dominante de la señal, facilitando el cálculo automático de la frecuencia respiratoria.
+
+Este procedimiento mejora la precisión del análisis y permite evaluar objetivamente las diferencias entre condiciones como reposo y verbalización.
+
+
+
+
+
+
+
 
 ### 3. Grafico de la convolución
 ```python
