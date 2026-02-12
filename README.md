@@ -134,13 +134,6 @@ Durante la respiración normal en reposo:
 
 - El conteo manual permitió estimar una frecuencia aproximada de ___ respiraciones por minuto.
 
-<p align="center">
-<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/1f87eb74-9b14-48a7-9521-088300940613" />
-</p>
-<p align="center">
-  Fig 4. Respiraciòn normal
-</p>
-
 
 ##### Durante el habla
 
@@ -157,10 +150,10 @@ Durante la respiración normal en reposo:
 Esto confirma que el habla modifica el patrón respiratorio al introducir un control voluntario sobre el proceso automático de respiración.
 
 <p align="center">
-<img width="225" height="225" alt="image" src="https://github.com/user-attachments/assets/1d5b71db-dd00-4f52-b182-2b7de132913b" />
+<img width="1053" height="699" alt="image" src="https://github.com/user-attachments/assets/af5aaf4c-312e-46ed-b4fc-093bf39f59a8" />
 </p>
 <p align="center">
-  Fig 5. Respiraciòn durante el habla
+  Fig 5. Respiración durante el habla
 </p>
 
 ------
@@ -517,6 +510,19 @@ Este procedimiento mejora la precisión del análisis y permite evaluar objetiva
 
 # 5. ANALISIS DE RESULTADOS
 
+<p align="center">
+<img width="1053" height="699" alt="image" src="https://github.com/user-attachments/assets/b10e1563-db33-41af-8051-fd62da4380df" />
+<p align="center">
+  Fig 4. Respiración normal Filtrada
+</p>
+
+<p align="center">
+<img width="1053" height="699" alt="image" src="https://github.com/user-attachments/assets/4d96f82e-8419-41d1-848d-3a0ddbc363e1" />
+</p>
+<p align="center">
+  Fig 5. Respiración durante el habla
+</p>
+
 # 6. CONCLUSIONES
 
 # 7. PREGUNTAS
@@ -524,7 +530,11 @@ Este procedimiento mejora la precisión del análisis y permite evaluar objetiva
 # 8. BIBLIOGRAFIAS
 
 - Biomedical Engineering Fundamentals | Joseph D. Bronzino | Taylor & Fr. (2006, April 14). Taylor & Francis. https://www.taylorfrancis.com/books/edit/10.1201/9781420003857/biomedical-engineering-fundamentals-joseph-bronzino
-- 
+- Fieselmann, J. F., Hendryx, M. S., Helms, C. M., & Wakefield, D. S. (1993). Respiratory rate predicts cardiopulmonary arrest for internal medicine inpatients. Journal of General Internal Medicine, 8(7), 354–360. https://doi.org/10.1007/bf02600071
+- Subbe, C. P., Davies, R. G., Williams, E., Rutherford, P., & Gemmell, L. (2003). Effect of introducing the Modified Early Warning score on clinical outcomes, cardio‐pulmonary arrests and intensive care utilisation in acute medical admissions*. Anaesthesia, 58(8), 797–802. https://doi.org/10.1046/j.1365-2044.2003.03258.x
+- Goldhill, D. R., McNarry, A. F., Mandersloot, G., & McGinley, A. (2005). A physiologically‐based early warning score for ward patients: the association between score and outcome*. Anaesthesia, 60(6), 547–553. https://doi.org/10.1111/j.1365-2044.2005.04186.x
+- Chourpiliadis, C., & Bhardwaj, A. (2022, September 12). Physiology, respiratory rate. https://www.ncbi.nlm.nih.gov/books/NBK537306/
+- Cretikos, M., Chen, J., Hillman, K., Bellomo, R., Finfer, S., & Flabouris, A. (2007). The objective medical emergency team activation criteria: A case–control study. Resuscitation, 73(1), 62–72. https://doi.org/10.1016/j.resuscitation.2006.08.020
 
 
 
