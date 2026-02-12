@@ -660,5 +660,5 @@ Ambas gráficas son fundamentales para comprender el comportamiento de la señal
 ----
 ## Autores 
 - 
-- 
+- Daniel Herrera
 - Santiago Mora
