@@ -448,8 +448,8 @@ Este procedimiento mejora la precisión del análisis y permite evaluar objetiva
   Fig 5. Respiración durante el habla
 </p>
 En base de las anteriores graficas las pasamos el dominio de FFT donde obtuvimos en cada grafica una frecuencia domoniante la cual utlizamos en para hallar las frecuencia respiratoria,como se puede observar en ambas graficas sus frecuencias dominates estan en el rango de (0.2-0.26).Cuyo resultados estan dentro del rango aceptable para un adulto sano entre los (12-20 rpm).
-FR reposo=12rpm
-FR hablando=12rpm
+- FR reposo=12rpm
+- FR hablando=12rpm
 Estos son resultados coherentes con los valores fisiológicos normales de una persona adulta en estado de reposo. Aunque la frecuencia respiratoria obtenida es similar en ambas condiciones, se evidencia que la principal diferencia no se encuentra en la cantidad de respiraciones por minuto sino en la forma del ciclo respiratorio. Durante el habla se observa mayor irregularidad en la señal, así como una espiración más controlada y prolongada, lo cual genera pequeñas variaciones en la distribución de energía del espectro de frecuencias.
 
 # 6. CONCLUSIONES
