@@ -20,7 +20,25 @@ En este laboratorio se analizó el patrón y la frecuencia respiratoria mediante
 En este laboratorio se estudió el patrón y la frecuencia respiratoria mediante la adquisición y análisis de una señal biológica con sensores, Arduino y MATLAB. Esta práctica brinda una base teórica y aplicada sobre el monitoreo respiratorio, permitiendo comprender su relevancia dentro de la instrumentación biomédica y su utilidad en contextos reales de evaluación fisiológica.
 
 -----
+# OBJETIVOS
 
+## Objetivo General
+
+Evaluar la influencia del habla o verbalización sobre el
+patrón respiratorio
+
+## Objetivos Específicos
+• Reconocer las variables físicas principalmente involucradas en el proceso
+respiratorio.
+
+• Desarrollar un sistema que extraiga el patrón respiratorio y la frecuencia
+respiratoria.
+
+• Identificar tareas de verbalización a partir del patrón y/o la frecuencia
+respiratoria.
+
+
+-----
 ## Proceso Respiratorio
 La respiración es un proceso vital para el funcionamiento normal en todos los niveles de organización, desde la célula hasta el organismo. El oxígeno, suministrado por la circulación local a nivel tisular, funciona en la membrana interna mitocondrial como mediador esencial para la liberación de energía. En las mitocondrias, los nutrientes digeridos experimentan reacciones metabólicas, llegan a la cadena de transporte de electrones y liberan compuestos de alta energía (p. ej., trifosfato de adenosina). El principal subproducto de este proceso, el dióxido de carbono, se libera en la sangre venosa y regresa a los pulmones. El dióxido de carbono se difunde a través de las paredes alveolares y se disuelve en el aire exhalado. La frecuencia respiratoria (es decir, el número de respiraciones por minuto) está altamente regulada para que las células produzcan la energía óptima en cualquier momento. Un complejo sistema nervioso de tejidos nerviosos regula la tasa de entrada de oxígeno y la tasa de salida de dióxido de carbono, ajustándola en consecuencia en condiciones que alteran las presiones parciales de los gases en la sangre. La respiración involucra el cerebro, el tronco encefálico, los músculos respiratorios, los pulmones, las vías respiratorias y los vasos sanguíneos. Todas estas estructuras tienen una participación estructural, funcional y reguladora en la respiración. [1]
 
@@ -32,34 +50,217 @@ La respiración es un proceso vital para el funcionamiento normal en todos los n
 </p>
 
 
-### 1. Convolución entre la señal x[n] y del sistema h[n]
+# 4. Captura de la señal
+Este proyecto implementa un sistema de adquisición de señal respiratoria utilizando una ESP32 programada en Arduino IDE, la cual captura la variación de voltaje generada por un sensor respiratorio y envía los datos a MATLAB mediante comunicación serial.
+
+El objetivo del script en MATLAB es:
+
+Capturar la señal durante un tiempo definido.
+
+- Visualizarla en tiempo real.
+
+- Guardarla en un archivo .mat.
+
+- Permitir análisis posterior (filtrado, FFT y cálculo de frecuencia respiratoria)
+
+ ## Descripción General del Funcionamiento
+
+El flujo del sistema es:
+
+- Sensor → ESP32 (ADC 12 bits) → Arduino IDE → Serial USB → MATLAB → Archivo .mat
+
+### La ESP32 digitaliza la señal analógica del sensor respiratorio y la envía como valores numéricos por puerto serial. MATLAB recibe esos valores, los grafica en tiempo real y los almacena.
+
+## Explicación del Código (adquisición)
+
+
+###  1️. Inicialización y entrada de datos
+
 ```python
-h = [5,6,0,0,7,7,5]
-x = [1,0,1,4,6,6,0,7,0,8]
-y = np.convolve(x,h,mode='full')
-print('h[n] =', h)
-print('x[n] =',x)
-print('y[n] =',y)
+clc; 
+clear;
+close all;
+
+nombre = input('Ingrese su nombre: ', 's');
+Trec = input('Ingrese la duración de la muestra en segundos: ');
+archivo = nombre + ".mat";
+
 ```
-$$
-h[n] = \begin{bmatrix}
-5 & 6 & 0 & 0 & 7 & 7 & 5
-\end{bmatrix}
-$$
+Este bloque limpia el entorno de MATLAB y solicita al usuario el nombre y el tiempo total de grabación.
+El archivo final se guardará con el nombre ingresado, permitiendo identificar fácilmente cada adquisición.
 
-$$
-x[n] = \begin{bmatrix}
-1 & 0 & 1 & 4 & 6 & 6 & 0 & 7 & 0 & 8
-\end{bmatrix}
-$$
+### 2️. Configuración del sistema
 
-$$
-y[n] = \begin{bmatrix}
-5 & 6 & 5 & 26 & 61 & 73 & 48 & 70 & 117 & 144 & 120 & 79 & 49 & 91 & 56 & 40
-\end{bmatrix}
-$$
+```python
+puerto = "COM13";
+baudrate = 115200;
+Fs = 50; % Hz
+ventana = 10;
 
-Este código en Python calcula la convolución discreta entre dos señales utilizando la función np.convolve() de NumPy. Primero, se definen dos listas, h y x, que representan la respuesta al impulso de un sistema y una señal de entrada, respectivamente. Luego, se aplica la convolución entre estas dos señales usando np.convolve(x, h, mode='full'), lo que genera una nueva señal y cuya longitud es la suma de las longitudes de x y h menos uno. La convolución es una operación fundamental en procesamiento de señales, ya que permite analizar cómo una señal se ve afectada por un sistema. Finalmente, el código imprime las señales h, x y y para visualizar los datos y el resultado de la convolución.
+Ntotal = Fs * Trec;
+Nvent = Fs * ventana;
+
+
+```
+
+Aquí se definen los parámetros principales del sistema:
+
+- puerto: corresponde al puerto asignado a la ESP32.
+
+- baudrate: debe coincidir con Serial.begin(115200) en Arduino IDE para que la comunicación sea correcta.
+
+- Fs (frecuencia de muestreo): determina cuántas muestras por segundo se adquieren.
+
+- ventana: cantidad de segundos visibles en tiempo real.
+- 
+¿Por qué se eligió Fs = 50 Hz?
+
+La respiración humana en reposo tiene una frecuencia aproximada entre 0.2 y 0.33 Hz (12–20 respiraciones por minuto), y durante el habla puede aumentar aprox de 0.5 Hz.
+
+
+### 3️. Conexión con la ESP32
+
+```python
+s = serialport(puerto, baudrate);
+configureTerminator(s,"LF");
+flush(s);
+pause(2);
+
+```
+
+Se configura el terminador de línea para que MATLAB pueda leer correctamente cada dato enviado desde Arduino IDE.
+La pausa de 2 segundos permite que la ESP32 se estabilice después de abrir el puerto.
+
+
+
+### 4️. Preparación de vectores y gráfica
+
+```python
+buffer = zeros(Nvent,1);
+voltaje = zeros(Ntotal,1);
+tiempo_total = (0:Ntotal-1)/Fs;
+tiempo_vent = linspace(-ventana, 0, Nvent);
+
+figure;
+h = plot(tiempo_vent, buffer, 'LineWidth', 1.5);
+ylim([0 3.3]);
+
+
+```
+- voltaje almacena toda la señal adquirida.
+
+- buffer permite mostrar solo los últimos 10 segundos.
+
+- tiempo_total genera el eje temporal completo.
+
+- ylim([0 3.3]) corresponde al rango típico de operación del ADC de la ESP32 (0–3.3 V).
+
+
+### 5️. Adquisición en tiempo real
+
+```python
+for k = 1:Ntotal
+ valor = str2double(readline(s));
+ if ~isnan(valor)
+ voltaje(k) = valor;
+ buffer = [buffer(2:end); valor];
+ set(h, 'YData', buffer);
+ drawnow limitrate;
+ end
+end
+
+
+```
+
+- Lee cada valor enviado por la ESP32.
+
+- Lo convierte a número.
+
+- Lo almacena en el vector completo.
+
+- Actualiza la gráfica en tiempo real.
+
+### 6️. Cierre y almacenamiento
+
+```python
+clear s;
+save(archivo, "voltaje", "tiempo_total", "Fs");
+
+```
+Se libera el puerto serial y se guarda la señal junto con el eje temporal y la frecuencia de muestreo para análisis posterior.
+
+
+### Codigo completo de captura
+
+```python
+clc;
+clear; 
+close all;
+
+% ================= SOLICITUD DE DATOS =================
+nombre = input('Ingrese su nombre: ', 's');
+Trec = input('Ingrese la duración de la muestra en segundos: ');
+archivo = nombre + ".mat";
+
+% ================= CONFIGURACIÓN TÉCNICA =================
+puerto = "COM13";
+baudrate = 115200;
+Fs = 50; % Hz
+ventana = 10; 
+
+Ntotal = Fs * Trec; 
+Nvent = Fs * ventana; 
+
+% ================= CONEXIÓN SERIAL =================
+s = serialport(puerto, baudrate);
+configureTerminator(s,"LF");
+flush(s);
+pause(2);
+
+% Buffers
+buffer = zeros(Nvent,1); 
+voltaje = zeros(Ntotal,1); 
+tiempo_total = (0:Ntotal-1)/Fs;
+tiempo_vent = linspace(-ventana, 0, Nvent);
+
+% Figura
+figure;
+h = plot(tiempo_vent, buffer, 'LineWidth', 1.5);
+xlabel('Tiempo (s)');
+ylabel('Voltaje (V)');
+title(['Señal respiratoria de: ', nombre]);
+grid on;
+ylim([0 3.3]);
+
+% ======== ADQUISICIÓN ========
+disp("Iniciando grabación...");
+
+for k = 1:Ntotal
+ valor = str2double(readline(s));
+ if ~isnan(valor)
+ voltaje(k) = valor;
+ buffer = [buffer(2:end); valor]; 
+ set(h, 'YData', buffer);
+ drawnow limitrate;
+ end
+end
+
+% Cerrar puerto
+clear s;
+
+
+% Guardar con el nombre ingresado
+save(archivo, "voltaje", "tiempo_total", "Fs");
+
+disp("Grabación finalizada y guardada como: " + archivo);
+```
+
+
+
+
+
+
+
 
 ---
 
