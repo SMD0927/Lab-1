@@ -171,7 +171,7 @@ El flujo del sistema es:
 
 - Sensor → ESP32 (ADC 12 bits) → Arduino IDE → Serial USB → MATLAB → Archivo .mat
 
-### La ESP32 digitaliza la señal analógica del sensor respiratorio y la envía como valores numéricos por puerto serial. MATLAB recibe esos valores, los grafica en tiempo real y los almacena.
+La ESP32 digitaliza la señal analógica del sensor respiratorio y la envía como valores numéricos por puerto serial. MATLAB recibe esos valores, los grafica en tiempo real y los almacena.
 
 ## Explicación del Código (adquisición)
 
@@ -293,9 +293,8 @@ Se libera el puerto serial y se guarda la señal junto con el eje temporal y la 
 
 ## Parte B (Parte Filtrado)
 
-### Después de adquirir y almacenar la señal respiratoria desde la ESP32, es necesario procesarla para obtener información fisiológicamente relevante. La señal original puede contener ruido, artefactos de movimiento y componentes no deseadas, por lo que se aplica un filtrado digital.
-
-### Posteriormente, se utiliza la Transformada Rápida de Fourier (FFT) para transformar la señal del dominio del tiempo al dominio de la frecuencia, permitiendo identificar la frecuencia respiratoria dominante de manera automática y objetiva.
+Después de adquirir y almacenar la señal respiratoria desde la ESP32, es necesario procesarla para obtener información fisiológicamente relevante. La señal original puede contener ruido, artefactos de movimiento y componentes no deseadas, por lo que se aplica un filtrado digital.
+Posteriormente, se utiliza la Transformada Rápida de Fourier (FFT) para transformar la señal del dominio del tiempo al dominio de la frecuencia, permitiendo identificar la frecuencia respiratoria dominante de manera automática y objetiva.
 
 
 ## 1. Carga de datos
