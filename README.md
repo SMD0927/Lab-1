@@ -1,9 +1,9 @@
 # Instrumentación Biomédica y Biosensores 
  LABORATORIO - 1 Monitoreo del patrón y frecuencia respiratoria 
 ###  Integrantes
-Shesly Nicole Colorado - 5600756.
-Santiago Mora - 
-Daniel Herrera - 
+- Shesly Nicole Colorado - 5600756
+- Santiago Mora - 5600775
+- Daniel Herrera - 5600588
 
 
 ## Requisitos
@@ -23,7 +23,7 @@ En este laboratorio se analizó el patrón y la frecuencia respiratoria mediante
 En este laboratorio se estudió el patrón y la frecuencia respiratoria mediante la adquisición y análisis de una señal biológica con sensores, Arduino y MATLAB. Esta práctica brinda una base teórica y aplicada sobre el monitoreo respiratorio, permitiendo comprender su relevancia dentro de la instrumentación biomédica y su utilidad en contextos reales de evaluación fisiológica.
 
 ### Proceso Respiratorio
-La respiración es un proceso vital para el funcionamiento normal en todos los niveles de organización, desde la célula hasta el organismo. El oxígeno, suministrado por la circulación local a nivel tisular, funciona en la membrana interna mitocondrial como mediador esencial para la liberación de energía. En las mitocondrias, los nutrientes digeridos experimentan reacciones metabólicas, llegan a la cadena de transporte de electrones y liberan compuestos de alta energía (p. ej., trifosfato de adenosina). El principal subproducto de este proceso, el dióxido de carbono, se libera en la sangre venosa y regresa a los pulmones. El dióxido de carbono se difunde a través de las paredes alveolares y se disuelve en el aire exhalado. La frecuencia respiratoria (es decir, el número de respiraciones por minuto) está altamente regulada para que las células produzcan la energía óptima en cualquier momento. Un complejo sistema nervioso de tejidos nerviosos regula la tasa de entrada de oxígeno y la tasa de salida de dióxido de carbono, ajustándola en consecuencia en condiciones que alteran las presiones parciales de los gases en la sangre. La respiración involucra el cerebro, el tronco encefálico, los músculos respiratorios, los pulmones, las vías respiratorias y los vasos sanguíneos. Todas estas estructuras tienen una participación estructural, funcional y reguladora en la respiración. [1]
+La respiración es un proceso vital para el funcionamiento normal en todos los niveles de organización, desde la célula hasta el organismo. El oxígeno, suministrado por la circulación local a nivel tisular, funciona en la membrana interna mitocondrial como mediador esencial para la liberación de energía. En las mitocondrias, los nutrientes digeridos experimentan reacciones metabólicas, llegan a la cadena de transporte de electrones y liberan compuestos de alta energía (p. ej., trifosfato de adenosina). El principal subproducto de este proceso, el dióxido de carbono, se libera en la sangre venosa y regresa a los pulmones. El dióxido de carbono se difunde a través de las paredes alveolares y se disuelve en el aire exhalado. La frecuencia respiratoria (es decir, el número de respiraciones por minuto) está altamente regulada para que las células produzcan la energía óptima en cualquier momento. Un complejo sistema nervioso de tejidos nerviosos regula la tasa de entrada de oxígeno y la tasa de salida de dióxido de carbono, ajustándola en consecuencia en condiciones que alteran las presiones parciales de los gases en la sangre. La respiración involucra el cerebro, el tronco encefálico, los músculos respiratorios, los pulmones, las vías respiratorias y los vasos sanguíneos. Todas estas estructuras tienen una participación estructural, funcional y reguladora en la respiración. 
 
 <p align="center">
   <img width="400" height="300" alt="ChatGPT Image 10 feb 2026, 11_51_06 p m" src="https://github.com/user-attachments/assets/af834e30-64be-4e7f-9ad0-447e488c4079" />
@@ -148,13 +148,6 @@ Durante la respiración normal en reposo:
 - La frecuencia respiratoria presentó cambios respecto al estado de reposo.
 
 Esto confirma que el habla modifica el patrón respiratorio al introducir un control voluntario sobre el proceso automático de respiración.
-
-<p align="center">
-<img width="1053" height="699" alt="image" src="https://github.com/user-attachments/assets/af5aaf4c-312e-46ed-b4fc-093bf39f59a8" />
-</p>
-<p align="center">
-  Fig 5. Respiración durante el habla
-</p>
 
 ------
 
@@ -298,75 +291,6 @@ save(archivo, "voltaje", "tiempo_total", "Fs");
 ```
 Se libera el puerto serial y se guarda la señal junto con el eje temporal y la frecuencia de muestreo para análisis posterior.
 
-
-### Codigo completo de captura
-
-```python
-clc;
-clear; 
-close all;
-
-% ================= SOLICITUD DE DATOS =================
-nombre = input('Ingrese su nombre: ', 's');
-Trec = input('Ingrese la duración de la muestra en segundos: ');
-archivo = nombre + ".mat";
-
-% ================= CONFIGURACIÓN TÉCNICA =================
-puerto = "COM13";
-baudrate = 115200;
-Fs = 50; % Hz
-ventana = 10; 
-
-Ntotal = Fs * Trec; 
-Nvent = Fs * ventana; 
-
-% ================= CONEXIÓN SERIAL =================
-s = serialport(puerto, baudrate);
-configureTerminator(s,"LF");
-flush(s);
-pause(2);
-
-% Buffers
-buffer = zeros(Nvent,1); 
-voltaje = zeros(Ntotal,1); 
-tiempo_total = (0:Ntotal-1)/Fs;
-tiempo_vent = linspace(-ventana, 0, Nvent);
-
-% Figura
-figure;
-h = plot(tiempo_vent, buffer, 'LineWidth', 1.5);
-xlabel('Tiempo (s)');
-ylabel('Voltaje (V)');
-title(['Señal respiratoria de: ', nombre]);
-grid on;
-ylim([0 3.3]);
-
-% ======== ADQUISICIÓN ========
-disp("Iniciando grabación...");
-
-for k = 1:Ntotal
- valor = str2double(readline(s));
- if ~isnan(valor)
- voltaje(k) = valor;
- buffer = [buffer(2:end); valor]; 
- set(h, 'YData', buffer);
- drawnow limitrate;
- end
-end
-
-% Cerrar puerto
-clear s;
-
-
-% Guardar con el nombre ingresado
-save(archivo, "voltaje", "tiempo_total", "Fs");
-
-disp("Grabación finalizada y guardada como: " + archivo);
-```
-
-
-
-
 ## Parte B (Parte Filtrado)
 
 ### Después de adquirir y almacenar la señal respiratoria desde la ESP32, es necesario procesarla para obtener información fisiológicamente relevante. La señal original puede contener ruido, artefactos de movimiento y componentes no deseadas, por lo que se aplica un filtrado digital.
@@ -497,7 +421,7 @@ resp_min = f_resp * 60;
 
 - Se obtiene la frecuencia correspondiente.
 
-- Se convierte a respiraciones por minuto multiplicando por 60.
+- Se convierte a respiraciones por minuto multiplicando por 60 la frecuencia dominante.
 
 
 ### Justificación
@@ -510,18 +434,23 @@ Este procedimiento mejora la precisión del análisis y permite evaluar objetiva
 
 # 5. ANALISIS DE RESULTADOS
 
+ A partir de la señal optenedida con el sensor FSR402 y el procesamiento realizado en MATLAB se logro observar y diferenciar el comportamiento de la respiración en condiciones normales de reposo la cual tubo un comportamiento muy similar a una senoidal y la respiración durante el habla la cual se lograba ver como el proceso de espiración era mas prolongado que el de la inspiración debido a que son más cortos los tiempos donde se toma aire ,como se puede observar en las siguientes graficas:
 <p align="center">
-<img width="1053" height="699" alt="image" src="https://github.com/user-attachments/assets/b10e1563-db33-41af-8051-fd62da4380df" />
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/b10e1563-db33-41af-8051-fd62da4380df" />
 <p align="center">
   Fig 4. Respiración normal Filtrada
 </p>
 
 <p align="center">
-<img width="1053" height="699" alt="image" src="https://github.com/user-attachments/assets/4d96f82e-8419-41d1-848d-3a0ddbc363e1" />
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/4d96f82e-8419-41d1-848d-3a0ddbc363e1" />
 </p>
 <p align="center">
   Fig 5. Respiración durante el habla
 </p>
+En base de las anteriores graficas las pasamos el dominio de FFT donde obtuvimos en cada grafica una frecuencia domoniante la cual utlizamos en para hallar las frecuencia respiratoria,como se puede observar en ambas graficas sus frecuencias dominates estan en el rango de (0.2-0.26).Cuyo resultados estan dentro del rango aceptable para un adulto sano entre los (12-20 rpm).
+FR reposo=12rpm
+FR hablando=12rpm
+Estos son resultados coherentes con los valores fisiológicos normales de una persona adulta en estado de reposo. Aunque la frecuencia respiratoria obtenida es similar en ambas condiciones, se evidencia que la principal diferencia no se encuentra en la cantidad de respiraciones por minuto sino en la forma del ciclo respiratorio. Durante el habla se observa mayor irregularidad en la señal, así como una espiración más controlada y prolongada, lo cual genera pequeñas variaciones en la distribución de energía del espectro de frecuencias.
 
 # 6. CONCLUSIONES
 
