@@ -478,7 +478,7 @@ Además, se mostró que la correcta colocación del sensor FSR402 en la región 
 - Finalmente, se creó un sistema funcional para adquirir y procesar señales con ESP32 y MATLAB,este sistema puede extraer tanto el patrón como la frecuencia respiratoria y identificar claramente las diferencias entre la respiración en reposo y durante el habla.
 
 
-# 7. BIBLIOGRAFIAS
+# 6. BIBLIOGRAFIAS
 
 - Biomedical Engineering Fundamentals | Joseph D. Bronzino | Taylor & Fr. (2006, April 14). Taylor & Francis. https://www.taylorfrancis.com/books/edit/10.1201/9781420003857/biomedical-engineering-fundamentals-joseph-bronzino
 - Fieselmann, J. F., Hendryx, M. S., Helms, C. M., & Wakefield, D. S. (1993). Respiratory rate predicts cardiopulmonary arrest for internal medicine inpatients. Journal of General Internal Medicine, 8(7), 354–360. https://doi.org/10.1007/bf02600071
