@@ -431,7 +431,7 @@ Este procedimiento mejora la precisión del análisis y permite evaluar objetiva
 
 ---------
 
-# 5. ANALISIS DE RESULTADOS
+# 4. ANALISIS DE RESULTADOS
 
  A partir de la señal optenedida con el sensor FSR402 y el procesamiento realizado en MATLAB se logro observar y diferenciar el comportamiento de la respiración en condiciones normales de reposo la cual tubo un comportamiento muy similar a una senoidal y la respiración durante el habla la cual se lograba ver como el proceso de espiración era mas prolongado que el de la inspiración debido a que son más cortos los tiempos donde se toma aire ,como se puede observar en las siguientes graficas:
 <p align="center">
@@ -469,16 +469,16 @@ Estos son resultados coherentes con los valores fisiológicos normales de una pe
 </p>
 Además, se mostró que la correcta colocación del sensor FSR402 en la región torácica fue un factor clave para la calidad de la señal obtenida. Una ubicación adecuada permitió captar con mayor claridad las variaciones mecánicas de expansión y contracción del tórax. Esto redujo el ruido por movimiento y mejoró la precisión en la estimación de la frecuencia respiratoria y del patrón respiratorio general.
 
-# 6. CONCLUSIONES
+# 5. CONCLUSIONES
 - Se evaluó la correcta influencia del habla en el patrón respiratorio.
 - Aunque la frecuencia respiratoria promedio se mantiene dentro de valores normales, la forma de la señal cambia.
 - Se observan espiraciones más largas y mayor irregularidad mientras las persona esta hablando.
 - También se identificaron las variables físicas que afectan el proceso respiratorio, especialmente la variación de presión mecánica y la expansión del tórax.
 - Estas pudieron medirse de manera indirecta con el sensor FSR402.
 - Finalmente, se creó un sistema funcional para adquirir y procesar señales con ESP32 y MATLAB,este sistema puede extraer tanto el patrón como la frecuencia respiratoria y identificar claramente las diferencias entre la respiración en reposo y durante el habla.
-# 7. PREGUNTAS
 
-# 8. BIBLIOGRAFIAS
+
+# 7. BIBLIOGRAFIAS
 
 - Biomedical Engineering Fundamentals | Joseph D. Bronzino | Taylor & Fr. (2006, April 14). Taylor & Francis. https://www.taylorfrancis.com/books/edit/10.1201/9781420003857/biomedical-engineering-fundamentals-joseph-bronzino
 - Fieselmann, J. F., Hendryx, M. S., Helms, C. M., & Wakefield, D. S. (1993). Respiratory rate predicts cardiopulmonary arrest for internal medicine inpatients. Journal of General Internal Medicine, 8(7), 354–360. https://doi.org/10.1007/bf02600071
