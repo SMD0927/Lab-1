@@ -451,7 +451,23 @@ En base de las anteriores graficas las pasamos el dominio de FFT donde obtuvimos
 - FR reposo=12rpm
 - FR hablando=12rpm
   
-Estos son resultados coherentes con los valores fisiológicos normales de una persona adulta en estado de reposo. Aunque la frecuencia respiratoria obtenida es similar en ambas condiciones, se evidencia que la principal diferencia no se encuentra en la cantidad de respiraciones por minuto sino en la forma del ciclo respiratorio. Durante el habla se observa mayor irregularidad en la señal, así como una espiración más controlada y prolongada, lo cual genera pequeñas variaciones en la distribución de energía del espectro de frecuencias.Además, se mostró que la correcta colocación del sensor FSR402 en la región torácica fue un factor clave para la calidad de la señal obtenida. Una ubicación adecuada permitió captar con mayor claridad las variaciones mecánicas de expansión y contracción del tórax. Esto redujo el ruido por movimiento y mejoró la precisión en la estimación de la frecuencia respiratoria y del patrón respiratorio general.
+Estos son resultados coherentes con los valores fisiológicos normales de una persona adulta en estado de reposo. Aunque la frecuencia respiratoria obtenida es similar en ambas condiciones, se evidencia que la principal diferencia no se encuentra en la cantidad de respiraciones por minuto sino en la forma del ciclo respiratorio. Durante el habla se observa mayor irregularidad en la señal, así como una espiración más controlada y prolongada, lo cual genera pequeñas variaciones en la distribución de energía del espectro de frecuencias.
+
+<p align="center">
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/74dd6e63-7711-4ec9-9a94-93539587945f"
+ />
+</p>
+<p align="center">
+  Fig 6. Respiracion Normal en el Dominio FFT
+</p>
+<p align="center">
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/3172f1ee-04a5-41b9-a43c-47cd5bc5c844"
+ />
+</p>
+<p align="center">
+  Fig 7. Respiracion Hablando en el Dominio FFT
+</p>
+Además, se mostró que la correcta colocación del sensor FSR402 en la región torácica fue un factor clave para la calidad de la señal obtenida. Una ubicación adecuada permitió captar con mayor claridad las variaciones mecánicas de expansión y contracción del tórax. Esto redujo el ruido por movimiento y mejoró la precisión en la estimación de la frecuencia respiratoria y del patrón respiratorio general.
 
 # 6. CONCLUSIONES
 - Se evaluó la correcta influencia del habla en el patrón respiratorio.
