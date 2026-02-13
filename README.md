@@ -121,6 +121,13 @@ Durante la exhalación, el tórax retorna a su posición inicial, disminuyendo l
 
 La ubicación torácica permitió capturar de manera directa el patrón respiratorio asociado a la mecánica pulmonar, siendo adecuada para el análisis del ciclo respiratorio y la estimación de la frecuencia dominante.
 
+<p align="center">
+ <img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/a6eb1e84-24bd-4b7a-813e-69c498ed4b16" />
+</p>
+<p align="center">
+  Fig 4. Montaje fisico
+</p>
+
 ### Señal en Serial Plotter (Reposo-Habla)
 #### En reposo
 
@@ -437,14 +444,14 @@ Este procedimiento mejora la precisión del análisis y permite evaluar objetiva
 <p align="center">
 <img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/b10e1563-db33-41af-8051-fd62da4380df" />
 <p align="center">
-  Fig 4. Respiración normal Filtrada
+  Fig 5. Respiración normal Filtrada
 </p>
 
 <p align="center">
 <img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/4d96f82e-8419-41d1-848d-3a0ddbc363e1" />
 </p>
 <p align="center">
-  Fig 5. Respiración durante el habla
+  Fig 6. Respiración durante el habla
 </p>
 En base de las anteriores graficas las pasamos el dominio de FFT donde obtuvimos en cada grafica una frecuencia domoniante la cual utlizamos en para hallar las frecuencia respiratoria,como se puede observar en ambas graficas sus frecuencias dominates estan en el rango de (0.2-0.26).Cuyo resultados estan dentro del rango aceptable para un adulto sano entre los (12-20 rpm).
 
@@ -458,14 +465,14 @@ Estos son resultados coherentes con los valores fisiológicos normales de una pe
  />
 </p>
 <p align="center">
-  Fig 6. Respiracion Normal en el Dominio FFT
+  Fig 7. Respiracion Normal en el Dominio FFT
 </p>
 <p align="center">
 <img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/3172f1ee-04a5-41b9-a43c-47cd5bc5c844"
  />
 </p>
 <p align="center">
-  Fig 7. Respiracion Hablando en el Dominio FFT
+  Fig 8. Respiracion Hablando en el Dominio FFT
 </p>
 Además, se mostró que la correcta colocación del sensor FSR402 en la región torácica fue un factor clave para la calidad de la señal obtenida. Una ubicación adecuada permitió captar con mayor claridad las variaciones mecánicas de expansión y contracción del tórax. Esto redujo el ruido por movimiento y mejoró la precisión en la estimación de la frecuencia respiratoria y del patrón respiratorio general.
 
